@@ -5,6 +5,8 @@ import Navbar from './components/Header/Navbar/Navbar';
 import UserHeader from './components/Userpages/UserHeader/UserHeader';
 import Books from './components/BookList/BookList';
 import AddBook from './components/AddBooks/AddBookForm';
+import Login from './components/Login/Login';
+import Signup from './components/Signup/Signup';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
       <Routes>
         <Route path = "/" element = {<SetHeader />}/>
           <Route path = "/addbook" element = {<AddBook />} />
+          <Route path='/login'  element = {<Login />}/>
+          <Route path='/sign-up'  element = {<Signup />}/>
       </Routes>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import "./UserHeader.css";
-import SearchForm from "../../SearchForm/SearchForm";
-import Navbar from "../../Header/Navbar/Navbar";
+import SearchForm from "../../Common/SearchForm/SearchForm";
+import Navbar from "../../Common/Header/Navbar/Navbar";
 
 
 function UserHeader() {
@@ -12,7 +12,7 @@ function UserHeader() {
     <div className="header-content flex flex-c text-center text-white">
         <h2 className="header-title text-capitalize">
             Find your favorites book
-        </h2><be/>
+        </h2><br/>
         <p className="header-text fs-18 fw-3">
             Choose a book a your choice and enjoy the reading of your heart
         </p>

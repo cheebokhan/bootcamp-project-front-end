@@ -12,10 +12,10 @@ function SearchForm() {
         <div className='search-form'>
           <div className='container'>
             <div className='search-form-content'>
-              <form className='search-form' onSubmit={""}>
+              <form className='search-form' onSubmit={()=> console.log('you searched for an item')}>
                 <div className='search-form-elem flex flex-sb bg-white'>
                   <input type = "text" className='form-control' placeholder='The Lost World ...' ref = {searchText} style={{border:"none"}} />
-                  <button type = "submit" className='flex flex-c' onClick={""}>
+                  <button type = "submit" className='flex flex-c' onClick={()=> console.log('you clicked on search icon')}>
                     <FaSearch className='text-purple' size = {32} />
                   </button>
                 </div>

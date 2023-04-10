@@ -31,12 +31,7 @@ const Books = () => {
           <span>2010</span>
         </div>
       </div>
-    </div>
-    //book 2
-   
-
-
-    
+    </div> 
   )
 }
 

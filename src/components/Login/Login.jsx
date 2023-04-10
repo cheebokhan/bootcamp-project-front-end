@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { LoginActions } from "../../Redux/actions/LoginActions";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.Login);
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     email: "",
@@ -9,15 +13,27 @@ const Login = () => {
   });
 
   const login = () => {
-    const info = {
+    const user = {
       email: inputs.email,
       password: inputs.password,
     };
-    console.log(info);
+    dispatch(LoginActions(user));
   };
 
   return (
     <div className="container mt-4">
+      {
+        state.isLoading === true && (
+          <h1>Loading.......</h1>
+        )
+      }
+      {
+        state.error !== '' && (
+          <div className="alter alert-danger">
+            {state.error}
+          </div>
+        )
+      }
       <div className="row">
         <div className="col-sm-6 text-black">
           <div className="text-center">
@@ -59,7 +75,7 @@ const Login = () => {
               <button
                 className="btn btn-info btn-lg w-100 text-white"
                 type="button"
-                onClick={login}
+                onClick={() => login()}
               >
                 Login
               </button>
@@ -70,7 +86,7 @@ const Login = () => {
               </a>
             </p>
             <p>
-              Don't have an account?{" "}
+              Don't have an account?
               <a href="" onClick={() => navigate("/sign-up")}>
                 Signup
               </a>

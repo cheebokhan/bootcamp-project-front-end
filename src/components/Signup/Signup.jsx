@@ -1,13 +1,17 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { SignUpActions } from "../../Redux/actions/SignUpActions";
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.Signup);
   const [inputs, setInputs] = useState({
     fullname: "",
     email: "",
     password: "",
     phone: "",
     gender: "",
-    profession:"",
+    profession: "",
   });
   const signUp = () => {
     const signupinfo = {
@@ -16,9 +20,9 @@ const Signup = () => {
       password: inputs.password,
       phone: inputs.phone,
       gender: inputs.gender,
-      profession:inputs.profession,
+      profession: inputs.profession,
     };
-    console.log(signupinfo);
+    dispatch(SignUpActions(signupinfo));
   };
   return (
     <div className="container mt-4">

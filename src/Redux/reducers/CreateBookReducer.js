@@ -1,6 +1,5 @@
 import { CREATE_BOOK_FAIL, CREATE_BOOK_REQUEST, CREATE_BOOK_SUCCESS } from "../ActionTypes/BookActionType";
 
-
 const CreateBookReducer=(state={},action)=>{
         switch(action.type){
             case CREATE_BOOK_REQUEST:

@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SignUpActions } from "../../Redux/actions/SignUpActions";
+import { Link, useNavigate } from "react-router-dom";
 
-const Signup = ({history}) => {
+const Signup = () => {
   const dispatch = useDispatch();
+  const navigate=useNavigate();
   const state = useSelector((state) => state.Signup);
+
+const {data}=state;
+
   const [inputs, setInputs] = useState({
     fullname: "",
     email: "",
@@ -17,13 +22,31 @@ const Signup = ({history}) => {
 
 const LoginReducer=useSelector(state=>state.Login);
 
-const {userInfo}=LoginReducer;
+const {userInfo,isLoading,error}=LoginReducer;
 
-useEffect(() => {
-  if (userInfo) {
-    history.push('/');
-  }
-}, [userInfo]);
+// useEffect(() => {
+//   if (userInfo) {
+//     history.push('/');
+//   }
+// }, [userInfo]);
+
+// function successoption(){
+//   {
+//     SignupReducer.error == '' && (
+//       <div className="alert alert-success">
+//         SignUp Successfully
+//       </div>
+//     )
+//    }
+//    {
+//     SignupReducer.error !== '' && (
+//       <div className="alert alert-danger">
+//         {SignupReducer.error}
+//       </div>
+//     )
+//    }
+// }
+
 
 
   const signUp = () => {
@@ -38,9 +61,15 @@ useEffect(() => {
     };
     debugger;
     dispatch(SignUpActions(signupinfo));
+    // navigate('/login')
+    
   };
   return (
+   
     <div className="container mt-4">
+ {/* {
+  successoption()
+ } */}
       <div className="row">
         <div className="col-sm-6 text-black">
           <div className="text-center">
@@ -154,11 +183,18 @@ useEffect(() => {
               <button
                 className="btn btn-info btn-lg w-100 text-white"
                 type="button"
-                onClick={signUp}
+                onClick={signUp} 
               >
                 Sign Up
               </button>
             </div>
+           
+            <p>
+              Login To Your Account 
+              <Link to="/login" className="text-decoration-none">
+               Login
+              </Link>
+            </p>
           </form>
         </div>
         <div className="col-sm-6 px-0 d-none d-sm-block">
@@ -166,7 +202,7 @@ useEffect(() => {
             src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bGlicmFyeXxlbnwwfHwwfHw%3D&w=1000&q=80"
             alt="Login image"
             className="w-100 vh-100 rounded-3"
-            style={{ objectFit: "cover", objectPosition: "left" }}
+            style={{ objectFit: "cover", objectPosition: "left" ,marginTop:"100px"}}
           />
         </div>
       </div>

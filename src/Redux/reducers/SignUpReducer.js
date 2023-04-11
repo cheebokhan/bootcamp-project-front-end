@@ -17,7 +17,7 @@ import { SIGNUP_REQUEST, SIGNUP_REQUEST_FAIL, SIGNUP_REQUEST_SUCCESS } from "../
         return {
           ...state,
           isLoading: false,
-          data: action.payload,
+          // data: action.payload,
           error: "",
         };
       case SIGNUP_REQUEST_FAIL:

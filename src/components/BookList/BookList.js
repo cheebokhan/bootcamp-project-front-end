@@ -8,10 +8,11 @@ const Books = (props) => {
   debugger;
 
   return (
-  <>
+  <div className='row m-2'>
+
     {
       (!BookArr || BookArr.length<1)  ? <p> no data found </p>:BookArr.map((el,index)=>{
-        return <div className='book-item  flex flex-column flex-sb' key={index} style={{width:"50%"}}>
+        return <div className='book-item  flex flex-column col-sm-3 flex-sb my-2' key={index}>
       <div className='book-item-img'>
         <img src = {Bookimg} alt = "cover" />
       </div>
@@ -41,7 +42,7 @@ const Books = (props) => {
     })
    }
     
-    </> 
+    </div> 
     )
   
 }

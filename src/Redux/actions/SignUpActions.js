@@ -20,12 +20,14 @@ export const SignUpActions = (user) => {
         debugger;
           dispatch({
         type: SIGNUP_REQUEST_SUCCESS,
-        payload: res.data,
+        // payload: res.data,
+        
       });
-      localStorage.setItem('userAuthData',JSON.stringify(res.data));
+
+      // localStorage.setItem('userAuthData',JSON.stringify(res.data));
 
       })
-      .catch(()=>{
+      .catch((err)=>{
         dispatch({
           type: SIGNUP_REQUEST_FAIL,
           payload: "Invalid username or password.",

@@ -38,6 +38,7 @@ function AddBooks(){
     };
 
     const {BookArr}=useSelector(state=>state.BookReducers);
+    const {userInfo}=useSelector(state=>state.Login);
 
 debugger;
    
@@ -53,8 +54,10 @@ debugger;
         category,
         booktype,
         bookdescription,
+        createdBy:userInfo._id,
       };
-      dispatch(BookActions.CreateBookActions(data))
+      dispatch(BookActions.CreateBookActions(data));
+      debugger;
     };
 
     // useEffect(()=>{

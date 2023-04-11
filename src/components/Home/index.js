@@ -19,9 +19,15 @@ function Home(){
 
     return <div className="holder">
         <Header/>
-        <Books
-          BookArr={BookArr}
-         />
+       
+    <Books BookArr={BookArr}/>
+        {/* {
+        BookArr.slice(0, 30).map((item, index) => {
+              return (
+                <Books key = {index} {...item} />
+              )
+              }
+            )}   */}
     </div>
 
 }

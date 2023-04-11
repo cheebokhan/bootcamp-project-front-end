@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginActions } from "../../Redux/actions/LoginActions";
+import SetNavBar from "../Common/Header/Navbar/Navbar";
 
-const Login = ({history}) => {
+const Login = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.Login);
+
   const {isLoading,userInfo,error}=state;
   const navigate = useNavigate();
+
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -21,11 +24,12 @@ const Login = ({history}) => {
     dispatch(LoginActions(user));
   };
 
-  useEffect(() => {
-    if (userInfo) history.push('/userdashboard');
-  }, [state]);
+  // useEffect(() => {
+  //   if (userInfo) history.push('/userdashboard');
+  // }, [state]);
 
-  return (
+  return (<>
+   <SetNavBar/>
     <div className="container mt-4">
       {
         state.isLoading === true && (
@@ -34,7 +38,7 @@ const Login = ({history}) => {
       }
       {
         state.error !== '' && (
-          <div className="alter alert-danger">
+          <div className="alert alert-danger">
             {state.error}
           </div>
         )
@@ -92,9 +96,9 @@ const Login = ({history}) => {
             </p>
             <p>
               Don't have an account?
-              <a href="" onClick={() => navigate("/sign-up")}>
+              <Link to='/signup' >
                 Signup
-              </a>
+              </Link>
             </p>
           </form>
         </div>
@@ -108,6 +112,9 @@ const Login = ({history}) => {
         </div>
       </div>
     </div>
+  </>
+ 
+    
   );
 };
 

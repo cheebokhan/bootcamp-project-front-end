@@ -32,13 +32,15 @@ function AddBooks(){
       uimage.src=URL.createObjectURL(event.target.files[0]);
       console.log(uimage.src);
      
-      console.log( setBookimage(uimage.src));
+       setBookimage(uimage.src)
       debugger;
       // setImage(uimage);
     };
 
     const {BookArr}=useSelector(state=>state.BookReducers);
     const {userInfo}=useSelector(state=>state.Login);
+
+    //  userInfo=localStorage.setItem('userAuthData', JSON.stringify(userInfo));
 
 debugger;
    
@@ -54,10 +56,34 @@ debugger;
         category,
         booktype,
         bookdescription,
+        bookimage,
         createdBy:userInfo._id,
       };
       dispatch(BookActions.CreateBookActions(data));
       debugger;
+    };
+
+    //convert book image into base 64
+    const convertToBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+          resolve(fileReader.result);
+        };
+        fileReader.onerror = (error) => {
+          reject(error);
+        };
+      });
+    };
+
+    //set the image in form and then passs the selected image to convertToBase64 method
+    const handleFileUpload = async (e) => {
+      uimage=document.getElementById("output");
+      uimage.src=URL.createObjectURL(e.target.files[0]);
+      const file = e.target.files[0];
+      const base64 = await convertToBase64(file);
+      setBookimage({ ...bookimage, myFile: base64 });
     };
     
     return (<>
@@ -143,7 +169,7 @@ debugger;
                 </FormGroup>
                 <FormGroup>
         <Label for="image" >Image</Label><br />
-        <Input type="file" accept="image/*" name="image" id="image" onChange={handleImageChange} />
+        <Input type="file" accept="image/*" name="image" id="image" onChange={handleFileUpload} />
         <img id="output"  height="150" src={uimage} style={{width:"100px",marginLeft:"35%"}}/>
       </FormGroup>
              

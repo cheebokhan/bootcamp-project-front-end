@@ -19,11 +19,11 @@ return async dispatch =>{
         await axios.post('/api/books',BookData,confiq).then((res)=>{
              dispatch({
             type:CREATE_BOOK_SUCCESS,
-            paload:res.data,
+            payload:res.data,
          }).catch((err)=>{
             dispatch({
                 type:CREATE_BOOK_FAIL,
-                paload: err.response && err.response.data.message
+                payload: err.response && err.response.data.message
             })
          })
         })
@@ -31,7 +31,7 @@ return async dispatch =>{
     } catch (error) {
         dispatch({
             type:CREATE_BOOK_FAIL,
-            paload: error.response && error.response.data.message
+            payload: error.response && error.response.data.message
         })
         
     }
@@ -40,6 +40,7 @@ return async dispatch =>{
 
 
 function GetBooks  () {
+  debugger;
     return async dispatch => {
       try {
         dispatch({

@@ -43,6 +43,11 @@ const Login = () => {
           </div>
         )
       }
+      {
+         state.userInfo !=='' &&(
+          <h2 className="alert alert-success">Login Sucessfully</h2>
+        )
+      }
       <div className="row">
         <div className="col-sm-6 text-black">
           <div className="text-center">

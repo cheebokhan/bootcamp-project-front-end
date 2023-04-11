@@ -14,7 +14,7 @@ const Books = (props) => {
       (!BookArr || BookArr.length<1)  ? <p> no data found </p>:BookArr.map((el,index)=>{
         return <div className='book-item  flex flex-column col-sm-3 flex-sb my-2' key={index}>
       <div className='book-item-img'>
-        <img src = {Bookimg} alt = "cover" />
+        <img src = {el.bookimage} alt = "cover" />
       </div>
       <div className='book-item-info text-center'>
         <Link to = {`/addbook`} >

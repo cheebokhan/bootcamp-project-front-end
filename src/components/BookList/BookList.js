@@ -4,7 +4,11 @@ import "./BookList.css";
 import Bookimg from "../../images/about-img.jpg";
 
 const Books = (props) => {
-  const {BookArr}=props;
+  const {BookArr,BookShelfArr,userid}=props;
+
+  //function
+  // if AddToShelf == function()
+  const {AddToShelf} = props;
   debugger;
 
   return (
@@ -12,6 +16,8 @@ const Books = (props) => {
 
     {
       (!BookArr || BookArr.length<1)  ? <p> no data found </p>:BookArr.map((el,index)=>{
+
+        var isBookreadbyThisUser = !BookShelfArr ? false : (BookShelfArr.find(a=> a.userid == userid && a.bookid == el._id) != null)
         return <div className='book-item  flex flex-column col-sm-3 flex-sb my-2' key={index}>
       <div className='book-item-img'>
         <img src = {el.bookimage} alt = "cover" />
@@ -37,7 +43,9 @@ const Books = (props) => {
           <span className='text-capitalize fw-7'>First Publish Year: </span>
           <span>2010</span>
         </div>
+
       </div>
+      <button onClick={()=>props.AddToShelf({_id:el._id, startreading: !isBookreadbyThisUser, userid:userid })} className='btn btn-outline-success'>{isBookreadbyThisUser ? "Remove From Shelf":"Add to shelf"}</button>
     </div>
     })
    }

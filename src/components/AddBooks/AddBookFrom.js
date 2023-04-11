@@ -56,7 +56,7 @@ debugger;
         category,
         booktype,
         bookdescription,
-        bookimage,
+        bookimage:bookimage.myFile,
         createdBy:userInfo._id,
       };
       dispatch(BookActions.CreateBookActions(data));

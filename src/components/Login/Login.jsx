@@ -46,6 +46,13 @@ const Login = () => {
       {
          state.userInfo !=='' &&(
           <h2 className="alert alert-success">Login Sucessfully</h2>
+          
+        )
+      }
+      {
+         state.userInfo !=='' &&(
+          navigate('/userdashboard')
+          
         )
       }
       <div className="row">

@@ -2,12 +2,13 @@ import {
   LOGIN_REQUEST,
   LOGIN_REQUEST_FAIL,
   LOGIN_REQUEST_SUCCESS,
+  USER_LOGOUT_SUCCESS,
 } from "../ActionTypes/LoginActionTypes";
 
 const initialState = {
   isLoading: false,
   error: "",
-  data: undefined
+  userInfo:"",
 };
 const LoginReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -20,7 +21,7 @@ const LoginReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        data: action.payload,
+        userInfo: action.payload,
         error: "",
       };
     case LOGIN_REQUEST_FAIL:
@@ -29,6 +30,10 @@ const LoginReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.payload,
       };
+      case USER_LOGOUT_SUCCESS:
+        return{
+
+        };
     default: {
       return state;
     }

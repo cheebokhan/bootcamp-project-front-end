@@ -1,87 +1,104 @@
 import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from "../Loader/Loader";
-import coverImg from "../../images/cover_not_found.jpg";
 import "./BookDetails.css";
+
 import {FaArrowLeft} from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { BookActions } from '../../Redux/actions/BookActions';
+import Loader from '../Loader/Loader';
 
-const URL = "https://openlibrary.org/works/";
 
-const BookDetails = () => {
+const BookDetails = (props) => {
+  
   const {id} = useParams();
   const [loading, setLoading] = useState(false);
   const [book, setBook] = useState(null);
   const navigate = useNavigate();
+  const dispatch=useDispatch();
+  const {BookShelfArr,userid,isLoading}=props;
+  debugger;
+
+  //function
+  // if AddToShelf == function()
+  const {AddToShelf} = props;
+
+  const {BookArr}=useSelector(state=>state.BookReducers);
+  // BookArr;
+// debugger;
+var bookdata=BookArr.find(a=>a._id == id);
+
+// debugger
+
 
   useEffect(() => {
-    setLoading(true);
-    async function getBookDetails(){
-      try{
-        const response = await fetch(`${URL}${id}.json`);
-        const data = await response.json();
-        console.log(data);
-
-        if(data){
-          const {description, title, covers, subject_places, subject_times, subjects} = data;
-          const newBook = {
-            description: description ? description.value : "No description found",
-            title: title,
-            cover_img: covers ? `https://covers.openlibrary.org/b/id/${covers[0]}-L.jpg` : coverImg,
-            subject_places: subject_places ? subject_places.join(", ") : "No subject places found",
-            subject_times : subject_times ? subject_times.join(", ") : "No subject times found",
-            subjects: subjects ? subjects.join(", ") : "No subjects found"
-          };
-          setBook(newBook);
-        } else {
-          setBook(null);
-        }
-        setLoading(false);
-      } catch(error){
-        console.log(error);
-        setLoading(false);
-      }
-    }
-    getBookDetails();
+    // setLoading(true);
+  dispatch(BookActions.GetBooks());
+  // debugger;
+   
   }, [id]);
+
+  var isBookreadbyThisUser = !BookShelfArr ?
+   false : (BookShelfArr.find(a=> a.userid == userid && a.bookid == BookArr._id) != null)
 
   if(loading) return <Loading />;
 
   return (
     <section className='book-details'>
-      <div className='container'>
-        <button type='button' className='flex flex-c back-btn' onClick={() => navigate("/book")}>
+     <div className='container'>
+        <button type='button' className='flex flex-c back-btn' onClick={() => navigate("/")}>
           <FaArrowLeft size = {22} />
           <span className='fs-18 fw-6'>Go Back</span>
         </button>
 
-        <div className='book-details-content grid'>
+        {/* { */}
+      {/* // (!BookArr || BookArr.length<1)  ? <Loader/>:BookArr.map((el,index)=>{ */}
+
+          {/* // var isBookreadbyThisUser = !BookShelfArr ? false : (BookShelfArr.find(a=> a.userid == userid && a.bookid == el._id) != null) */}
+
+            {/* // return  */}
+            <div className='book-details-content grid'>
           <div className='book-details-img'>
-            <img src = {book?.cover_img} alt = "cover img" />
+            <img src = {bookdata.bookimage} alt = "cover img" />
           </div>
           <div className='book-details-info'>
             <div className='book-details-item title'>
-              <span className='fw-6 fs-24'>{book?.title}</span>
+              <span className='fw-6 fs-24'>
+                {bookdata.title}
+                </span>
             </div>
             <div className='book-details-item description'>
-              <span>{book?.description}</span>
+              <span>{bookdata.bookdescription}</span>
             </div>
             <div className='book-details-item'>
-              <span className='fw-6'>Subject Places: </span>
-              <span className='text-italic'>{book?.subject_places}</span>
+              <span className='fw-6'>Book type: </span>
+              <span className='text-italic'>
+                {bookdata.booktype}
+                </span>
             </div>
             <div className='book-details-item'>
-              <span className='fw-6'>Subject Times: </span>
-              <span className='text-italic'>{book?.subject_times}</span>
+              <span className='fw-6'>Author Name: </span>
+              <span className='text-italic'>
+                {bookdata.author}
+                </span>
             </div>
             <div className='book-details-item'>
-              <span className='fw-6'>Subjects: </span>
-              <span>{book?.subjects}</span>
+              <span className='fw-6'>Book Category: </span>
+              <span>{bookdata.category}</span>
             </div>
-            <button class="button" onClick={() => navigate("/")}>Add to BookShelf</button>
+            <button 
+            onClick={()=>props.AddToShelf({_id:BookArr._id, startreading: !isBookreadbyThisUser, userid:userid })}
+              className='btn btn-outline-success'>
+               {isBookreadbyThisUser ? "Remove From Shelf":"Add to shelf"}
+        </button>
           </div>
+          
         </div>
-      </div>
+      {/* // })
+      // } */}
+      </div> 
+      
     </section>
   )
 }

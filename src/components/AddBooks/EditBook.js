@@ -15,8 +15,8 @@ import {
 import SetNavBar from '../Common/Header/Navbar/Navbar';
 import { BookActions } from '../../Redux/actions/BookActions';
 
-const AddBooks=(props)=>{
-
+const Editbook=()=>{
+debugger;
     const [title,setTitle]=useState("");
     const [author,setAuthor]=useState("");
     const [category,setCategory]=useState("");
@@ -25,7 +25,7 @@ const AddBooks=(props)=>{
    const [bookimage,setBookimage]=useState("");
 
   //  const {id}=props._id;
-console.log(props.id);
+// console.log(props.id);
 
     var uimage;
 
@@ -62,7 +62,7 @@ const id="642f48608435f3640f2e9b99";
         bookimage:bookimage.myFile,
         createdBy:userInfo._id,
       };
-      dispatch(BookActions.UpdateBookActions(id,data));
+      dispatch(BookActions.UpdateBookActions(data));
       debugger;
     };
 
@@ -198,4 +198,4 @@ const id="642f48608435f3640f2e9b99";
            
 }
 
-export default AddBooks;
+export default Editbook;

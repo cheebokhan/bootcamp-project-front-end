@@ -1,11 +1,13 @@
 import axios from "axios";
-import { CREATE_BOOK_FAIL, CREATE_BOOK_REQUEST, CREATE_BOOK_SUCCESS,FETCH_BOOKS ,ADDTOSHELF_BOOK_FAIL,ADDTOSHELF_BOOK_SUCCESS,ADDTOSHELF_BOOK_REQUEST, FETCH_BOOKSHELF} from "../ActionTypes/BookActionType";
+import { CREATE_BOOK_FAIL, CREATE_BOOK_REQUEST, CREATE_BOOK_SUCCESS,FETCH_BOOKS ,ADDTOSHELF_BOOK_FAIL,ADDTOSHELF_BOOK_SUCCESS,ADDTOSHELF_BOOK_REQUEST, FETCH_BOOKSHELF, UPDATE_BOOK_REQUEST, UPDATE_BOOK_SUCCESS, UPDATE_BOOK_FAIL, DELETE_BOOK_REQUEST, DELETE_BOOK_SUCCESS, DELETE_BOOK_FAIL} from "../ActionTypes/BookActionType";
 
 
 export const BookActions={
     CreateBookActions,
     GetBooks,
-    AddToShelf
+    AddToShelf,
+    UpdateBookActions,
+    DeleteBook
 }
 
 function AddToShelf(BookData){
@@ -114,5 +116,85 @@ function GetBooks  () {
       }
     };
   };
+
+
+  function UpdateBookActions(bookId, bookData) {
+    debugger
+    return async (dispatch) => {
+      try {
+        dispatch({
+          type: UPDATE_BOOK_REQUEST,
+        });
+  
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+  
+         await axios.put(`/api/books/${bookId}`, bookData, config).then((res)=>{
+          dispatch({
+            type: UPDATE_BOOK_SUCCESS,
+            payload: res.data,
+          });
+         }).catch((error)=>{
+          dispatch({
+            type: UPDATE_BOOK_FAIL,
+            payload:
+              error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+          });
+         })
+  
+       
+      } catch (error) {
+        dispatch({
+          type: UPDATE_BOOK_FAIL,
+          payload:
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message,
+        });
+      }
+    };
+  }
+  
+
+   function  DeleteBook(bookId) {
+    debugger
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: DELETE_BOOK_REQUEST,
+      });
+  
+      await axios.delete(`/api/books/${bookId}`).then((res)=>{
+        dispatch({
+          type: DELETE_BOOK_SUCCESS,
+          payload: bookId,
+        });
+      }).catch((error)=>{
+        dispatch({
+          type: DELETE_BOOK_FAIL,
+          payload:
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message,
+        });
+      })
+  
+     
+    } catch (error) {
+      dispatch({
+        type: DELETE_BOOK_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  }
+}
 
 // export default CreateBookActions;

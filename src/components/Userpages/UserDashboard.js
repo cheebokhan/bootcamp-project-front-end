@@ -11,9 +11,28 @@ function UserDashboard(props) {
     debugger;
     const {userInfo}=useSelector(state=>state.Login);
     debugger;
+
     useEffect(()=>{
         dispatch(BookActions.GetBooks())
     },[]);
+
+    function navigateedit(id){
+      debugger;
+      console.log(id);
+  // navigation('editbook',selectedbook)
+  debugger
+  
+    }
+
+    //this function call the BookActions method and delete user from data-base
+    function Deletebook(id){
+      debugger
+      dispatch(BookActions.DeleteBook(id));
+      debugger
+    }
+
+    const userbook=BookArr.filter(a=>a.createdBy==userInfo._id);
+    debugger;
 
   //function
   // if AddToShelf == function()
@@ -22,19 +41,23 @@ function UserDashboard(props) {
     <div>
         <Header/>
         <div> 
-            <Link className="text-decoration-none text-black px-2" style={{fontSize:"20px",fontWeight:"bold"}}>Private Library</Link>
-            <Link className="text-decoration-none text-black px-2" style={{fontSize:"20px",fontWeight:"bold"}}>Book Shelf</Link>
+            <Link className="text-decoration-none text-black px-2 btn btn-outline-info m-3" to='/userdashboard' 
+            style={{fontSize:"20px",fontWeight:"bold",border:"none"}}>Private Library</Link>
+
+            <Link className="text-decoration-none text-black px-2 btn btn-outline-info m-3" to='/bookshelf'
+            style={{fontSize:"20px",fontWeight:"bold",border:"none"}}>Book Shelf</Link>
         </div>
+        <div className='row m-2'>
       {
-        !BookArr || !userInfo || BookArr.length<1 ? <p>No Book Found</p> : userInfo._id == BookArr.createdBy ? 
-        BookArr.map((el,index)=>{
-           if(BookArr.createdBy==userInfo._id) {
+        !userbook || !userInfo || userbook.length<1 ? <p>No Book Found</p> : 
+        userbook.map((el,index)=>{
+       
             return <div className='book-item  flex flex-column col-sm-3 flex-sb my-2' key={index}>
             <div className='book-item-img'>
-              <img src = {""} alt = "cover" />
+              <img src = {el.bookimage} alt = "cover" />
             </div>
             <div className='book-item-info text-center'>
-              <Link to = {`/addbook`} >
+              <Link to = {`/bookdetails/${el._id}`} >
                 <div className='book-item-info-item title fw-7 fs-18'>
                   <span>{el.title} </span>
                 </div>
@@ -54,15 +77,25 @@ function UserDashboard(props) {
                 <span className='text-capitalize fw-7'>First Publish Year: </span>
                 <span>2010</span>
               </div>
+              <div className='book-item-info-item publish-time fs-15'>
+          
+           <button  className='btn btn-outline-info px-4 m-2' onClick={()=>navigateedit(el._id)}>
+            Edit
+            </button>
+            <button  className='btn btn-outline-danger px-4 m-2' onClick={()=>Deletebook(el._id)}>
+            Delete
+            </button>
+        </div>
       
       
          </div>
       
               </div>
-           }
            
-        }):<div></div> 
+           
+        }) 
     }
+    </div>
        
     </div>
 

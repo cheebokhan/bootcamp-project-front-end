@@ -24,14 +24,15 @@ export const SignUpActions = (user,navigate) => {
       }).catch((err)=>{
         dispatch({
           type: SIGNUP_REQUEST_FAIL,
-          payload: "Invalid username or password.",
+          payload: "username or email is already exist.",
         });
+        alert("username or email is already exist");
       })
     
     } catch (error) {
       dispatch({
         type: SIGNUP_REQUEST_FAIL,
-        payload: "Invalid username or password.",
+        payload: "username or email is already exist.",
       });
     }
   };

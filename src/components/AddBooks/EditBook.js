@@ -14,57 +14,36 @@ import {
   } from "reactstrap";
 import SetNavBar from '../Common/Header/Navbar/Navbar';
 import { BookActions } from '../../Redux/actions/BookActions';
+import { useParams } from 'react-router-dom';
 
 const Editbook=()=>{
 debugger;
-    const [title,setTitle]=useState("");
-    const [author,setAuthor]=useState("");
-    const [category,setCategory]=useState("");
-    const [booktype,setBooktype]=useState("");
-    const [bookdescription,setBookdescription]=useState("");
-   const [bookimage,setBookimage]=useState("");
+const {id} =useParams();
+ 
+   const {BookArr}=useSelector(state=>state.BookReducers);
+   const {userInfo}=useSelector(state=>state.Login);
+   const dispatch=useDispatch();
 
-  //  const {id}=props._id;
-// console.log(props.id);
 
-    var uimage;
+  const Bookdata=BookArr.find(a=>a._id==id);
+  debugger
+
+    const [title,setTitle]=useState(Bookdata.title);
+    const [author,setAuthor]=useState(Bookdata.author);
+    const [category,setCategory]=useState(Bookdata.category);
+    const [booktype,setBooktype]=useState(Bookdata.booktype);
+    const [bookdescription,setBookdescription]=useState(Bookdata.bookdescription);
+   const [bookimage,setBookimage]=useState(Bookdata.bookimage);
+
+   var uimage;
 
     function handleImageChange(event) {
       uimage=document.getElementById("output");
       uimage.src=URL.createObjectURL(event.target.files[0]);
       console.log(uimage.src);
      
-       setBookimage(uimage.src)
-      debugger;
-      // setImage(uimage);
     };
 
-    const {BookArr}=useSelector(state=>state.BookReducers);
-    const {userInfo}=useSelector(state=>state.Login);
-
-    //  userInfo=localStorage.setItem('userAuthData', JSON.stringify(userInfo));
-
-debugger;
-const id="642f48608435f3640f2e9b99";
-   
-  
-    const dispatch=useDispatch();
-
-    const handleSubmit = e => {
-      e.preventDefault();
-  debugger;
-      var data = {
-        title,
-        author,
-        category,
-        booktype,
-        bookdescription,
-        bookimage:bookimage.myFile,
-        createdBy:userInfo._id,
-      };
-      dispatch(BookActions.UpdateBookActions(data));
-      debugger;
-    };
 
     //convert book image into base 64
     const convertToBase64 = (file) => {
@@ -88,6 +67,26 @@ const id="642f48608435f3640f2e9b99";
       const base64 = await convertToBase64(file);
       setBookimage({ ...bookimage, myFile: base64 });
     };
+
+
+
+    const handleSubmit = e => {
+      e.preventDefault();
+  
+      var data = {
+        title,
+        author,
+        category,
+        booktype,
+        bookdescription,
+        bookimage:bookimage.myFile,
+        createdBy:userInfo._id,
+      };
+      dispatch(BookActions.UpdateBookActions(id,data));
+      debugger;
+    };
+
+
     
     return (<>
         <SetNavBar/>
@@ -106,7 +105,7 @@ const id="642f48608435f3640f2e9b99";
                   <Input
                     type="text"
                     id="title"
-                    value={title}
+                    defaultValue={Bookdata.title}
                     onChange={(e) =>
                       setTitle(e.target.value)
                     }
@@ -118,7 +117,7 @@ const id="642f48608435f3640f2e9b99";
                     type="text"
                     name='author'
                     id="author"
-                    value={author}
+                    defaultValue={Bookdata.author}
                     onChange={(e) =>
                       setAuthor( e.target.value )
                     }
@@ -130,7 +129,7 @@ const id="642f48608435f3640f2e9b99";
                     type="select"
                    
                     id="category"
-                    value={category}
+                    defaultValue={Bookdata.category}
                     onChange={(e) =>
                       setCategory(e.target.value )
                     }
@@ -148,7 +147,7 @@ const id="642f48608435f3640f2e9b99";
                     type="select"
                     
                     id="booktype"
-                    value={booktype}
+                    defaultValue={Bookdata.booktype}
                     onChange={(e) =>
                       setBooktype(e.target.value )
                     }
@@ -160,25 +159,25 @@ const id="642f48608435f3640f2e9b99";
                 </FormGroup>
 
                 <FormGroup>
-                  <Label htmlFor="bookdescription">Book Type</Label>
+                  <Label htmlFor="bookdescription">Description</Label>
 
-                <input name="bookdescription" cols="65" rows="5" type='text'
+                  <textarea name="bookdescription" cols="58" rows="5" type='text'
                 id='bookdescription'
-                value={bookdescription}
+                defaultValue={Bookdata.bookdescription}
                  onChange={(e) =>
                     setBookdescription(e.target.value )
                   }
-                ></input>
+                ></textarea>
                 </FormGroup>
                 <FormGroup>
         <Label for="image" >Image</Label><br />
         <Input type="file" accept="image/*" name="image" id="image" onChange={handleFileUpload} />
-        <img id="output"  height="150" src={uimage} style={{width:"100px",marginLeft:"35%"}}/>
+        <img id="output"  height="150" src={Bookdata.bookimage} style={{width:"100px",marginLeft:"35%"}}/>
       </FormGroup>
              
                 <div className="pt-1 mb-4">
                   <Button color="info" className="btn-lg w-100" >
-                    Add book
+                    Update book
                   </Button>
     </div>
     </Form>

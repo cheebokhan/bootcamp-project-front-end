@@ -9,6 +9,7 @@ const Login = () => {
   const state = useSelector((state) => state.Login);
 
   const {isLoading,userInfo,error}=state;
+  
   const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
@@ -22,11 +23,9 @@ const Login = () => {
       password: inputs.password,
     };
     dispatch(LoginActions(user));
+      navigate('/userdashboard');
   };
 
-  // useEffect(() => {
-  //   if (userInfo) history.push('/userdashboard');
-  // }, [state]);
 
   return (<>
    <SetNavBar/>

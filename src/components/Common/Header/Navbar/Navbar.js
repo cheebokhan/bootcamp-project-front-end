@@ -1,11 +1,19 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logoutUserAction } from '../../../../Redux/actions/LoginActions';
 
 
 function SetNavBar() {
+  const dispatch=useDispatch();
+
+  function Logout(){
+    debugger
+dispatch(logoutUserAction());
+
+  }
 
    const {userInfo}=useSelector(state=>state.Login);
 
@@ -25,7 +33,7 @@ function SetNavBar() {
               !userInfo || userInfo.length<1 ?  <Link to="/login" className="text-decoration-none text-black navbar px-3 btn btn-outline-info"
              style={{border:"none", fontWeight:"bold"}}>Login</Link>
              :<a href="/login" className="text-decoration-none text-black navbar px-3 btn btn-outline-info"
-             style={{border:"none", fontWeight:"bold"}}>Logout</a>
+             style={{border:"none", fontWeight:"bold"}} onClick={Logout}>Logout</a>
             }
           
           </Nav>

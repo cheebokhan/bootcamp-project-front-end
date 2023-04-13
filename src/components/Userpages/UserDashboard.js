@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../Common/Header/Header";
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +6,8 @@ import { BookActions } from "../../Redux/actions/BookActions";
 
 function UserDashboard(props) {
     const dispatch=useDispatch();
+    const navigate=useNavigate();
+
     const {BookArr,BookShelfArr}=useSelector(state=>state.BookReducers);
     //const {BookArr}=BookReducers;
     debugger;
@@ -18,8 +20,7 @@ function UserDashboard(props) {
 
     function navigateedit(id){
       debugger;
-      console.log(id);
-  // navigation('editbook',selectedbook)
+     navigate(`/editbook/${id}`)
   debugger
   
     }
@@ -29,6 +30,8 @@ function UserDashboard(props) {
       debugger
       dispatch(BookActions.DeleteBook(id));
       debugger
+      alert("successfully deleted");
+      navigate('/');
     }
 
     const userbook=BookArr.filter(a=>a.createdBy==userInfo._id);
@@ -57,7 +60,7 @@ function UserDashboard(props) {
               <img src = {el.bookimage} alt = "cover" />
             </div>
             <div className='book-item-info text-center'>
-              <Link to = {`/bookdetails/${el._id}`} >
+              <Link to = {`/bookdetails/${el._id}`} className="text-decoration-none text-black" >
                 <div className='book-item-info-item title fw-7 fs-18'>
                   <span>{el.title} </span>
                 </div>
@@ -69,14 +72,19 @@ function UserDashboard(props) {
               </div>
       
               <div className='book-item-info-item edition-count fs-15'>
-                <span className='text-capitalize fw-7'>Total Editions: </span>
-                <span>2000</span>
+                <span className='text-capitalize fw-7'>Category: </span>
+                <span>{el.category}</span>
+              </div>
+              <div className='book-item-info-item edition-count fs-15 m-1'>
+                <span className='text-capitalize fw-7'>Book Type: </span>
+                <span>{el.booktype}</span>
               </div>
       
               <div className='book-item-info-item publish-year fs-15'>
-                <span className='text-capitalize fw-7'>First Publish Year: </span>
-                <span>2010</span>
+                <span className='text-capitalize fw-7'>Publish Date: </span>
+                <span>{el && el.createdAt && el.createdAt.slice(0, 10)}</span>
               </div>
+              <br/>
               <div className='book-item-info-item publish-time fs-15'>
           
            <button  className='btn btn-outline-info px-4 m-2' onClick={()=>navigateedit(el._id)}>

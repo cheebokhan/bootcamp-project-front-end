@@ -18,6 +18,7 @@ const BookDetails = (props) => {
   const [book, setBook] = useState(null);
   const navigate = useNavigate();
   const dispatch=useDispatch();
+  
   const {BookShelfArr,userid,isLoading}=props;
   debugger;
 
@@ -28,7 +29,7 @@ const BookDetails = (props) => {
   const {BookArr}=useSelector(state=>state.BookReducers);
 var bookdata=BookArr.find(a=>a._id == id);
 
-
+debugger
 
   useEffect(() => {
   dispatch(BookActions.GetBooks());
@@ -66,12 +67,7 @@ var bookdata=BookArr.find(a=>a._id == id);
             <div className='book-details-item description'>
               <span>{bookdata.bookdescription}</span>
             </div>
-            <div className='book-details-item'>
-              <span className='fw-6'>Book type: </span>
-              <span className='text-italic'>
-                {bookdata.booktype}
-                </span>
-            </div>
+            
             <div className='book-details-item'>
               <span className='fw-6'>Author Name: </span>
               <span className='text-italic'>
@@ -82,7 +78,14 @@ var bookdata=BookArr.find(a=>a._id == id);
               <span className='fw-6'>Book Category: </span>
               <span>{bookdata.category}</span>
             </div>
+            <div className='book-details-item'>
+              <span className='fw-6'>Public Date: </span>
+              <span className='text-italic'>
+              {bookdata && bookdata.createdAt && bookdata.createdAt.slice(0, 10)}
+                </span>
+            </div>
           </div>
+         
           
         </div>
       </div> 

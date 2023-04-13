@@ -33,21 +33,22 @@ const Login = () => {
 
   return (<>
    <SetNavBar/>
+
     <div className="container mt-4">
       {
-        state.isLoading === true && (
+        isLoading === true && (
           <h1>Loading.......</h1>
         )
       }
       {
-        state.error !== '' && (
+        error !== '' && (
           <div className="alert alert-danger">
             {state.error}
           </div>
         )
       }
       {
-         state.userInfo !=='' &&(
+         userInfo !=='' &&(
           <h2 className="alert alert-success">Login Sucessfully</h2>
           
         )

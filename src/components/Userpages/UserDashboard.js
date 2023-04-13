@@ -3,6 +3,7 @@ import Header from "../Common/Header/Header";
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { BookActions } from "../../Redux/actions/BookActions";
+import Loader from "../Loader/Loader";
 
 function UserDashboard(props) {
     const dispatch=useDispatch();
@@ -51,7 +52,7 @@ function UserDashboard(props) {
         </div>
         <div className='row m-2'>
       {
-        !userbook || !userInfo || userbook.length<1 ? <p>No Book Found</p> : 
+        !userbook || !userInfo || userbook.length<1 ? <Loader/> : 
         userbook.map((el,index)=>{
        
             return <div className='book-item  flex flex-column col-sm-3 flex-sb my-2' key={index}>

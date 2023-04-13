@@ -14,7 +14,7 @@ import {
   } from "reactstrap";
 import SetNavBar from '../Common/Header/Navbar/Navbar';
 import { BookActions } from '../../Redux/actions/BookActions';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Editbook=()=>{
 debugger;
@@ -23,6 +23,7 @@ const {id} =useParams();
    const {BookArr}=useSelector(state=>state.BookReducers);
    const {userInfo}=useSelector(state=>state.Login);
    const dispatch=useDispatch();
+   const navigate=useNavigate();
 
 
   const Bookdata=BookArr.find(a=>a._id==id);
@@ -79,10 +80,10 @@ const {id} =useParams();
         category,
         booktype,
         bookdescription,
-        bookimage:bookimage.myFile,
+        bookimage:Bookdata.bookimage,
         createdBy:userInfo._id,
       };
-      dispatch(BookActions.UpdateBookActions(id,data));
+      dispatch(BookActions.UpdateBookActions(id,data,navigate));
       debugger;
     };
 

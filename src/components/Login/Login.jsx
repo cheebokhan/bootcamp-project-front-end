@@ -22,8 +22,8 @@ const Login = () => {
       email: inputs.email,
       password: inputs.password,
     };
-    dispatch(LoginActions(user));
-      navigate('/userdashboard');
+    dispatch(LoginActions(user,navigate));
+      
   };
 
 

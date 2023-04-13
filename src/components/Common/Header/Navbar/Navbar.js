@@ -27,13 +27,20 @@ dispatch(logoutUserAction());
           <Nav className="me-auto ">
             <Link to="/" className="text-decoration-none text-black navbar px-3 btn btn-outline-info"
               style={{border:"none", fontWeight:"bold"}}>Home</Link>
-            <Link to="/addbook" className="text-decoration-none text-black navbar px-3 btn btn-outline-info"
+
+            <Link to="/aboutus" className="text-decoration-none text-black navbar px-3 btn btn-outline-info"
               style={{border:"none", fontWeight:"bold"}}>About</Link>
+
             {
               !userInfo || userInfo.length<1 ?  <Link to="/login" className="text-decoration-none text-black navbar px-3 btn btn-outline-info"
              style={{border:"none", fontWeight:"bold"}}>Login</Link>
              :<a href="/login" className="text-decoration-none text-black navbar px-3 btn btn-outline-info"
              style={{border:"none", fontWeight:"bold"}} onClick={Logout}>Logout</a>
+            }
+                 {
+              !userInfo || userInfo.length<1 ?  <></>
+             :<Link to="/addbook" className="text-decoration-none text-black navbar px-3 btn btn-outline-info"
+             style={{border:"none", fontWeight:"bold"}}>AddBook</Link>
             }
           
           </Nav>

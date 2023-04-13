@@ -1,5 +1,7 @@
 import axios from "axios";
 import { CREATE_BOOK_FAIL, CREATE_BOOK_REQUEST, CREATE_BOOK_SUCCESS,FETCH_BOOKS ,ADDTOSHELF_BOOK_FAIL,ADDTOSHELF_BOOK_SUCCESS,ADDTOSHELF_BOOK_REQUEST, FETCH_BOOKSHELF, UPDATE_BOOK_REQUEST, UPDATE_BOOK_SUCCESS, UPDATE_BOOK_FAIL, DELETE_BOOK_REQUEST, DELETE_BOOK_SUCCESS, DELETE_BOOK_FAIL} from "../ActionTypes/BookActionType";
+import { useNavigate } from "react-router-dom";
+
 
 
 export const BookActions={
@@ -118,7 +120,9 @@ function GetBooks  () {
   };
 
 
-  function UpdateBookActions(bookId, bookData) {
+  function UpdateBookActions(bookId, bookData,navigate) {
+
+
     debugger
     return async (dispatch) => {
       try {
@@ -137,6 +141,7 @@ function GetBooks  () {
             type: UPDATE_BOOK_SUCCESS,
             payload: res.data,
           });
+          navigate('/userdashboard');
          }).catch((error)=>{
           dispatch({
             type: UPDATE_BOOK_FAIL,

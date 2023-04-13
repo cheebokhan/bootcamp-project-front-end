@@ -36,7 +36,7 @@ const {userInfo,isLoading,error}=LoginReducer;
       username:inputs.username,
     };
     debugger;
-    dispatch(SignUpActions(signupinfo));
+    dispatch(SignUpActions(signupinfo,navigate));
 
     
   };

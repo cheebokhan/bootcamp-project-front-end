@@ -8,6 +8,7 @@ import UserDashboard from './components/Userpages/UserDashboard';
 import BookDetails from './components/BookDetails/BookDetails';
 import UserHome from './components/Userpages/Userindex';
 import Editbook from './components/AddBooks/EditBook';
+import AboutUs from './components/AboutUs/AboutUs';
 
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
           <Route path = "/addbook" element = {<AddBooks />} />
           <Route path='/login'  element = {<Login/>}/>
           <Route path='/signup'  element = {<Signup />}/>
+          <Route path = '/aboutus' element = {<AboutUs />}/>
+
 
           <Route path='/userdashboard'  element = {<UserDashboard />}/>
           <Route path = '/bookdetails/:id' element = {<BookDetails />}/>

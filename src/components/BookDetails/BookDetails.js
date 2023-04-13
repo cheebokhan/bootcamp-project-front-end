@@ -26,17 +26,12 @@ const BookDetails = (props) => {
   const {AddToShelf} = props;
 
   const {BookArr}=useSelector(state=>state.BookReducers);
-  // BookArr;
-// debugger;
 var bookdata=BookArr.find(a=>a._id == id);
 
-// debugger
 
 
   useEffect(() => {
-    // setLoading(true);
   dispatch(BookActions.GetBooks());
-  // debugger;
    
   }, [id]);
 

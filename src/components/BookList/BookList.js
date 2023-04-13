@@ -14,7 +14,6 @@ const Books = (props) => {
   return (
   <div className='row m-2'>
     
-
     {
       (!publicbooks || publicbooks.length<1)  ? <Loader/>:publicbooks.map((el,index)=>{
 
@@ -45,16 +44,13 @@ const Books = (props) => {
           <span className='text-capitalize'>Publish Date: </span>
           <span>{el && el.createdAt && el.createdAt.slice(0, 10)}</span>
         </div>
-       
         <br/>
-
       </div>
       <button onClick={()=>props.AddToShelf({_id:el._id, startreading: !isBookreadbyThisUser, userid:userid })}
        className='btn btn-outline-success'>{isBookreadbyThisUser ? "Remove From Shelf":"Add to shelf"}</button>
     </div>
     })
    }
-    
     </div> 
     )
   

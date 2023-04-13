@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../Common/Header/Header';
-// import {useHistory} from "react-router-dom";
 
 import {
     Form,
@@ -39,10 +38,6 @@ const AddBooks=(props)=>{
     const {BookArr}=useSelector(state=>state.BookReducers);
     const {userInfo}=useSelector(state=>state.Login);
 
-    //  userInfo=localStorage.setItem('userAuthData', JSON.stringify(userInfo));
-
-   
-  
     const dispatch=useDispatch();
 
     const handleSubmit = e => {

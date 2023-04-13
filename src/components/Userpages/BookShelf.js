@@ -8,9 +8,7 @@ function BookShelf(props) {
     // if AddToShelf == function()
     //book shelf code
     const {AddToShelf} = props;
-    // const userreading= BookShelfArr.filter(a=> a.userid == userid && BookArr.filter(a=>a.createdBy)==a.userid);
-    // const userreading = BookShelfArr.filter(a => a.userid === userid &&
-    //      BookArr.some(b => b.createdBy === a.userid));
+    
 
     debugger
   return (

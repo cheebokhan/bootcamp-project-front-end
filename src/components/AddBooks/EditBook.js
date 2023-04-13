@@ -44,11 +44,7 @@ const {id} =useParams();
      
     };
 
-  
 
-    //  userInfo=localStorage.setItem('userAuthData', JSON.stringify(userInfo));
-   
-  
     //convert book image into base 64
     const convertToBase64 = (file) => {
       return new Promise((resolve, reject) => {

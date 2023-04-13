@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../Common/Header/Header';
+// import {useHistory} from "react-router-dom";
 
 import {
     Form,
@@ -14,6 +15,7 @@ import {
   } from "reactstrap";
 import SetNavBar from '../Common/Header/Navbar/Navbar';
 import { BookActions } from '../../Redux/actions/BookActions';
+import { useNavigate } from 'react-router-dom';
 
 const AddBooks=(props)=>{
 
@@ -24,9 +26,7 @@ const AddBooks=(props)=>{
     const [bookdescription,setBookdescription]=useState("");
    const [bookimage,setBookimage]=useState("");
 
-  //  const {id}=props._id;
-console.log(props.id);
-
+  const navigate=useNavigate();
     var uimage;
 
     function handleImageChange(event) {
@@ -34,9 +34,6 @@ console.log(props.id);
       uimage.src=URL.createObjectURL(event.target.files[0]);
       console.log(uimage.src);
      
-       setBookimage(uimage.src)
-      debugger;
-      // setImage(uimage);
     };
 
     const {BookArr}=useSelector(state=>state.BookReducers);
@@ -44,8 +41,6 @@ console.log(props.id);
 
     //  userInfo=localStorage.setItem('userAuthData', JSON.stringify(userInfo));
 
-debugger;
-const id="642f48608435f3640f2e9b99";
    
   
     const dispatch=useDispatch();
@@ -62,7 +57,13 @@ const id="642f48608435f3640f2e9b99";
         bookimage:bookimage.myFile,
         createdBy:userInfo._id,
       };
-      dispatch(BookActions.UpdateBookActions(id,data));
+      const success= dispatch(BookActions.CreateBookActions(data));
+      if (!success) {
+        alert('Failed to add book');
+        return;
+      }
+  
+      navigate('/');
       debugger;
     };
 
@@ -160,15 +161,15 @@ const id="642f48608435f3640f2e9b99";
                 </FormGroup>
 
                 <FormGroup>
-                  <Label htmlFor="bookdescription">Book Type</Label>
+                  <Label htmlFor="bookdescription">Book Description</Label>
 
-                <input name="bookdescription" cols="65" rows="5" type='text'
+                <textarea name="bookdescription" cols="58" rows="5" type='text'
                 id='bookdescription'
                 value={bookdescription}
                  onChange={(e) =>
                     setBookdescription(e.target.value )
                   }
-                ></input>
+                ></textarea>
                 </FormGroup>
                 <FormGroup>
         <Label for="image" >Image</Label><br />

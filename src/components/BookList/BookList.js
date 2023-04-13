@@ -24,7 +24,7 @@ const Books = (props) => {
         <img src = {el.bookimage} alt = "cover" />
       </div>
       <div className='book-item-info text-center'>
-        <Link to = {`/bookdetails/${el._id}`} >
+        <Link to = {`/bookdetails/${el._id}`} className='text-decoration-none text-black'>
           <div className='book-item-info-item title fw-7 fs-18'>
             <span>{el.title}</span>
           </div>
@@ -42,8 +42,8 @@ const Books = (props) => {
         <br/>
 
         <div className='book-item-info-item publish-time fs-15'>
-          <span className='text-capitalize'>Description: </span>
-          <span>{el && el.bookdescription && el.bookdescription.slice(0, 20)}</span>
+          <span className='text-capitalize'>Publish Date: </span>
+          <span>{el && el.createdAt && el.createdAt.slice(0, 10)}</span>
         </div>
        
         <br/>

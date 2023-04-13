@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../Common/Header/Header";
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +6,8 @@ import { BookActions } from "../../Redux/actions/BookActions";
 
 function UserDashboard(props) {
     const dispatch=useDispatch();
+    const navigate=useNavigate();
+
     const {BookArr,BookShelfArr}=useSelector(state=>state.BookReducers);
     //const {BookArr}=BookReducers;
     debugger;
@@ -18,8 +20,7 @@ function UserDashboard(props) {
 
     function navigateedit(id){
       debugger;
-      console.log(id);
-  // navigation('editbook',selectedbook)
+     navigate(`/editbook/${id}`)
   debugger
   
     }
@@ -57,7 +58,7 @@ function UserDashboard(props) {
               <img src = {el.bookimage} alt = "cover" />
             </div>
             <div className='book-item-info text-center'>
-              <Link to = {`/bookdetails/${el._id}`} >
+              <Link to = {`/bookdetails/${el._id}`} className="text-decoration-none text-black" >
                 <div className='book-item-info-item title fw-7 fs-18'>
                   <span>{el.title} </span>
                 </div>

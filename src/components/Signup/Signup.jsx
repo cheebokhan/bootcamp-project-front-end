@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SignUpActions } from "../../Redux/actions/SignUpActions";
 import { Link, useNavigate } from "react-router-dom";
+import SetNavBar from "../Common/Header/Navbar/Navbar";
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -24,31 +25,6 @@ const LoginReducer=useSelector(state=>state.Login);
 
 const {userInfo,isLoading,error}=LoginReducer;
 
-// useEffect(() => {
-//   if (userInfo) {
-//     history.push('/');
-//   }
-// }, [userInfo]);
-
-// function successoption(){
-//   {
-//     SignupReducer.error == '' && (
-//       <div className="alert alert-success">
-//         SignUp Successfully
-//       </div>
-//     )
-//    }
-//    {
-//     SignupReducer.error !== '' && (
-//       <div className="alert alert-danger">
-//         {SignupReducer.error}
-//       </div>
-//     )
-//    }
-// }
-
-
-
   const signUp = () => {
     const signupinfo = {
       fullname: inputs.fullname,
@@ -61,15 +37,21 @@ const {userInfo,isLoading,error}=LoginReducer;
     };
     debugger;
     dispatch(SignUpActions(signupinfo));
-    // navigate('/login')
+
     
   };
-  return (
+  return (<>
+  <SetNavBar/>
+    
    
     <div className="container mt-4">
- {/* {
-  successoption()
- } */}
+        {
+         LoginReducer.userInfo !=='' &&(
+          <h2 className="alert alert-success">Sign-Up Sucessfully</h2>
+          
+        )
+      }
+
       <div className="row">
         <div className="col-sm-6 text-black">
           <div className="text-center">
@@ -207,7 +189,8 @@ const {userInfo,isLoading,error}=LoginReducer;
         </div>
       </div>
     </div>
-  );
+    </>
+    );
 };
 
 export default Signup;

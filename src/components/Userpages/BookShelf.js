@@ -30,10 +30,10 @@ function BookShelf(props) {
     //   const isBookreadbyThisUser = !BookShelfArr ? false : (BookShelfArr.filter(a=> a.userid === userid && a.bookid === el._id) !== null);
       return <> {!shelfbook ?<div></div>: <div className='book-item flex flex-column col-sm-3 flex-sb my-2' key={index}>
           <div className='book-item-img'>
-            <img src = {""} alt = "cover" />
+            <img src = {el.bookimage} alt = "cover" />
           </div>
           <div className='book-item-info text-center'>
-            <Link to={`/bookdetails/${el._id}`}>
+            <Link to={`/bookdetails/${el._id}`} className='text-decoration-none text-black'>
               <div className='book-item-info-item title fw-7 fs-18'>
                 <span>{el.title}</span>
               </div>

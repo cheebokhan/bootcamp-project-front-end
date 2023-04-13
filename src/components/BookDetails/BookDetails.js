@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { BookActions } from '../../Redux/actions/BookActions';
 import Loader from '../Loader/Loader';
+import SetNavBar from '../Common/Header/Navbar/Navbar';
 
 
 const BookDetails = (props) => {
@@ -45,6 +46,8 @@ var bookdata=BookArr.find(a=>a._id == id);
   if(loading) return <Loading />;
 
   return (
+    <>
+    <SetNavBar/>
     <section className='book-details'>
      <div className='container'>
         <button type='button' className='flex flex-c back-btn' onClick={() => navigate("/")}>
@@ -52,12 +55,6 @@ var bookdata=BookArr.find(a=>a._id == id);
           <span className='fs-18 fw-6'>Go Back</span>
         </button>
 
-        {/* { */}
-      {/* // (!BookArr || BookArr.length<1)  ? <Loader/>:BookArr.map((el,index)=>{ */}
-
-          {/* // var isBookreadbyThisUser = !BookShelfArr ? false : (BookShelfArr.find(a=> a.userid == userid && a.bookid == el._id) != null) */}
-
-            {/* // return  */}
             <div className='book-details-content grid'>
           <div className='book-details-img'>
             <img src = {bookdata.bookimage} alt = "cover img" />
@@ -65,7 +62,10 @@ var bookdata=BookArr.find(a=>a._id == id);
           <div className='book-details-info'>
             <div className='book-details-item title'>
               <span className='fw-6 fs-24'>
+                <h2>
                 {bookdata.title}
+
+                </h2>
                 </span>
             </div>
             <div className='book-details-item description'>
@@ -87,19 +87,14 @@ var bookdata=BookArr.find(a=>a._id == id);
               <span className='fw-6'>Book Category: </span>
               <span>{bookdata.category}</span>
             </div>
-            <button 
-            onClick={()=>props.AddToShelf({_id:BookArr._id, startreading: !isBookreadbyThisUser, userid:userid })}
-              className='btn btn-outline-success'>
-               {isBookreadbyThisUser ? "Remove From Shelf":"Add to shelf"}
-        </button>
           </div>
           
         </div>
-      {/* // })
-      // } */}
       </div> 
       
     </section>
+ 
+    </>
   )
 }
 

@@ -16,12 +16,19 @@ const LoginActions = (user) => {
         "Content-Type": "application/json",
       };
 
-      const { data } = await axios.post("/api/users/login", user, confiq);
-      dispatch({
-        type: LOGIN_REQUEST_SUCCESS,
-        payload: data,
-      });
-      localStorage.setItem('userAuthData', JSON.stringify(data));
+      const { data } = await axios.post("/api/users/login", user, confiq).then((res)=>{
+        dispatch({
+          type: LOGIN_REQUEST_SUCCESS,
+          payload:res.data,
+        });
+        localStorage.setItem('userAuthData', JSON.stringify(res.data));
+      }).catch((error)=>{
+        dispatch({
+          type: LOGIN_REQUEST_FAIL,
+          payload: "Invalid username or password.",
+        });
+      })
+     
     } catch (error) {
       dispatch({
         type: LOGIN_REQUEST_FAIL,
@@ -33,6 +40,7 @@ const LoginActions = (user) => {
 
 //Logout action
 const logoutUserAction = () => async dispatch => {
+  debugger;
   try {
     //Remove user from storage
     localStorage.removeItem('userAuthData');

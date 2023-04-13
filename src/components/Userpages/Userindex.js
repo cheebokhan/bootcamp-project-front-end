@@ -22,25 +22,15 @@ debugger;
 dispatch(BookActions.AddToShelf(bookObj))
     }
 
-    // useEffect(()=>{
-    //     dispatch(BookActions.GetBooks())
-    // },[]);
+    useEffect(()=>{
+        dispatch(BookActions.GetBooks())
+    },[]);
 
     return <div className="holder">
         <Header/>
         <BookShelf BookArr={BookArr} AddToShelf={AddToShelf} BookShelfArr={BookShelfArr} userid={userInfo._id}
      isLoading={isLoading}  userbook={userbook}/>
 
-      {/* <BookDetails BookArr={BookArr} AddToShelf={AddToShelf} BookShelfArr={BookShelfArr} userid={userInfo._id}
-     isLoading={isLoading}  userbook={userbook}/> */}
-     
-        {/* {
-        BookArr.slice(0, 30).map((item, index) => {
-              return (
-                <Books key = {index} {...item} />
-              )
-              }
-            )}   */}
     </div>
 
 }

@@ -30,6 +30,8 @@ function UserDashboard(props) {
       debugger
       dispatch(BookActions.DeleteBook(id));
       debugger
+      alert("successfully deleted");
+      navigate('/');
     }
 
     const userbook=BookArr.filter(a=>a.createdBy==userInfo._id);
@@ -70,14 +72,19 @@ function UserDashboard(props) {
               </div>
       
               <div className='book-item-info-item edition-count fs-15'>
-                <span className='text-capitalize fw-7'>Total Editions: </span>
-                <span>2000</span>
+                <span className='text-capitalize fw-7'>Category: </span>
+                <span>{el.category}</span>
+              </div>
+              <div className='book-item-info-item edition-count fs-15 m-1'>
+                <span className='text-capitalize fw-7'>Book Type: </span>
+                <span>{el.booktype}</span>
               </div>
       
               <div className='book-item-info-item publish-year fs-15'>
-                <span className='text-capitalize fw-7'>First Publish Year: </span>
-                <span>2010</span>
+                <span className='text-capitalize fw-7'>Publish Date: </span>
+                <span>{el && el.createdAt && el.createdAt.slice(0, 10)}</span>
               </div>
+              <br/>
               <div className='book-item-info-item publish-time fs-15'>
           
            <button  className='btn btn-outline-info px-4 m-2' onClick={()=>navigateedit(el._id)}>

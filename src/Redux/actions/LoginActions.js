@@ -6,7 +6,9 @@ import {
   USER_LOGOUT_SUCCESS,
 } from "../ActionTypes/LoginActionTypes";
 
-const LoginActions = (user) => {
+
+
+const LoginActions = (user,navigate) => {
   return async (dispatch) => {
     try {
       dispatch({
@@ -22,6 +24,7 @@ const LoginActions = (user) => {
           payload:res.data,
         });
         localStorage.setItem('userAuthData', JSON.stringify(res.data));
+        navigate('/userdashboard');
       }).catch((error)=>{
         dispatch({
           type: LOGIN_REQUEST_FAIL,

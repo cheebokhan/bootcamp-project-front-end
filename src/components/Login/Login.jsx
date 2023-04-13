@@ -8,7 +8,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.Login);
 
-  const {isLoading,userInfo,error}=state;
+  var {isLoading,userInfo,error}=state;
   
   const navigate = useNavigate();
 
@@ -22,35 +22,34 @@ const Login = () => {
       email: inputs.email,
       password: inputs.password,
     };
-    dispatch(LoginActions(user));
-      navigate('/userdashboard');
+    dispatch(LoginActions(user,navigate));
+    
+
+    //store local storage data in variable userInfo just for testing 
+    userInfo=localStorage.setItem("userAuthData",user);
+      
   };
 
 
   return (<>
    <SetNavBar/>
+
     <div className="container mt-4">
       {
-        state.isLoading === true && (
+        isLoading === true && (
           <h1>Loading.......</h1>
         )
       }
       {
-        state.error !== '' && (
+        error !== '' && (
           <div className="alert alert-danger">
             {state.error}
           </div>
         )
       }
       {
-         state.userInfo !=='' &&(
+         userInfo !=='' &&(
           <h2 className="alert alert-success">Login Sucessfully</h2>
-          
-        )
-      }
-      {
-         state.userInfo !=='' &&(
-          navigate('/userdashboard')
           
         )
       }

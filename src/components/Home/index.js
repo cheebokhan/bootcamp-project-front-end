@@ -11,7 +11,7 @@ debugger;
 
     const dispatch=useDispatch();
     const {BookArr,BookShelfArr,isLoading}=useSelector(state=>state.BookReducers);
-    //const {BookArr}=BookReducers;
+    
     debugger;
     const {userInfo}=useSelector(state=>state.Login);
 
@@ -42,16 +42,7 @@ dispatch(BookActions.AddToShelf(bookObj))
        
     <Books BookArr={BookArr} AddToShelf={AddToShelf} BookShelfArr={BookShelfArr} userid={userInfo._id}
      isLoading={isLoading}/>
-        {/* <BookShelf BookArr={BookArr} AddToShelf={AddToShelf} BookShelfArr={BookShelfArr} userid={userInfo._id}
-     isLoading={isLoading}/> */}
-
-        {/* {
-        BookArr.slice(0, 30).map((item, index) => {
-              return (
-                <Books key = {index} {...item} />
-              )
-              }
-            )}   */}
+       
     </div>
 
 }

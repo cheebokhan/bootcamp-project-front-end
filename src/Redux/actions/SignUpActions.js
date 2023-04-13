@@ -5,7 +5,7 @@ import {
   SIGNUP_REQUEST_SUCCESS,
 } from "../ActionTypes/SignUpActionTypes";
 
-export const SignUpActions = (user) => {
+export const SignUpActions = (user,navigate) => {
   debugger;
   return async (dispatch) => {
     try {
@@ -17,17 +17,11 @@ export const SignUpActions = (user) => {
       };
 
       await axios.post('/api/users/register', user, confiq).then((res)=>{
-        debugger;
           dispatch({
         type: SIGNUP_REQUEST_SUCCESS,
-        // payload: res.data,
-        
       });
-
-      // localStorage.setItem('userAuthData',JSON.stringify(res.data));
-
-      })
-      .catch((err)=>{
+      navigate("/login")
+      }).catch((err)=>{
         dispatch({
           type: SIGNUP_REQUEST_FAIL,
           payload: "Invalid username or password.",

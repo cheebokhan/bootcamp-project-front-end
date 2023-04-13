@@ -9,9 +9,8 @@ function UserDashboard(props) {
     const navigate=useNavigate();
 
     const {BookArr,BookShelfArr}=useSelector(state=>state.BookReducers);
-    //const {BookArr}=BookReducers;
     debugger;
-    const {userInfo}=useSelector(state=>state.Login);
+    var {userInfo}=useSelector(state=>state.Login);
     debugger;
 
     useEffect(()=>{
@@ -27,12 +26,12 @@ function UserDashboard(props) {
 
     //this function call the BookActions method and delete user from data-base
     function Deletebook(id){
-      debugger
       dispatch(BookActions.DeleteBook(id));
-      debugger
       alert("successfully deleted");
       navigate('/');
     }
+
+    // var {userInfo}=props
 
     const userbook=BookArr.filter(a=>a.createdBy==userInfo._id);
     debugger;

@@ -15,11 +15,12 @@ function UserHome(){
     const {userInfo}=useSelector(state=>state.Login);
 
     const userbook=BookArr.filter(a=>a.createdBy==userInfo._id);
+
+    var userInfostore=localStorage.getItem("userAuthData")
     
 
     const AddToShelf = (bookObj)=>{
-debugger;
-dispatch(BookActions.AddToShelf(bookObj))
+      dispatch(BookActions.AddToShelf(bookObj))
     }
 
     useEffect(()=>{
@@ -29,7 +30,7 @@ dispatch(BookActions.AddToShelf(bookObj))
     return <div className="holder">
         <Header/>
         <BookShelf BookArr={BookArr} AddToShelf={AddToShelf} BookShelfArr={BookShelfArr} userid={userInfo._id}
-     isLoading={isLoading}  userbook={userbook}/>
+     isLoading={isLoading}  userbook={userbook} userInfo={userInfostore}/>
 
     </div>
 

@@ -21,8 +21,11 @@ const {data}=state;
     username:""
   });
 
+
+  //select login reducer from global state and assign it to LoginReducer constant
 const LoginReducer=useSelector(state=>state.Login);
 
+//destructure login reducer and get data from reducer
 const {userInfo,isLoading,error}=LoginReducer;
 
   const signUp = () => {
@@ -35,7 +38,6 @@ const {userInfo,isLoading,error}=LoginReducer;
       profession: inputs.profession,
       username:inputs.username,
     };
-    debugger;
     dispatch(SignUpActions(signupinfo,navigate));
 
     

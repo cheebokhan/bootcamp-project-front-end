@@ -35,7 +35,7 @@ const Books = (props) => {
         </div>
 
         <div className='book-item-info-item edition-count fs-15'>
-          <span className='text-capitalize fw-7'>Category : </span>
+          <span className='text-capitalize fw-7 p-2'>Category : </span>
           <span>{el.category}</span>
         </div>
         <br/>

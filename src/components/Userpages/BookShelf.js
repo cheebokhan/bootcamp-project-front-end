@@ -43,14 +43,15 @@ function BookShelf(props) {
             </div>
 
             <div className='book-item-info-item edition-count fs-15'>
-              <span className='text-capitalize fw-7'>Total Editions: </span>
-              <span>2000</span>
+              <span className='text-capitalize fw-7'>Book Category: </span>
+              <span>{el.category}</span>
             </div>
 
-            <div className='book-item-info-item publish-year fs-15'>
-              <span className='text-capitalize fw-7'>First Publish Year: </span>
-              <span>2010</span>
+            <div className='book-item-info-item publish-year fs-15 p-2'>
+              <span className='text-capitalize fw-7'>Publish Date: </span>
+              <span>{el && el.createdAt && el.createdAt.slice(0, 10)}</span>
             </div>
+            <br/>
 
           </div>
           <button

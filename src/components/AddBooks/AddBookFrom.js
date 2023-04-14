@@ -52,14 +52,11 @@ const AddBooks=(props)=>{
         bookimage:bookimage.myFile,
         createdBy:userInfo._id,
       };
-      const success= dispatch(BookActions.CreateBookActions(data));
+      const success= dispatch(BookActions.CreateBookActions(data,navigate));
       if (!success) {
         alert('Failed to add book');
         return;
       }
-  
-      navigate('/');
-      debugger;
     };
 
     //convert book image into base 64

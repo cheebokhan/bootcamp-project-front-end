@@ -43,7 +43,7 @@ const Login = () => {
       {
         error !== '' && (
           <div className="alert alert-danger">
-            {state.error}
+            {error}
           </div>
         )
       }

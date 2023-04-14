@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 function BookShelf(props) {
     const {BookArr,BookShelfArr,userid,isLoading,userbook}=props;
+
     //function
     // if AddToShelf == function()
     //book shelf code
@@ -25,8 +26,8 @@ function BookShelf(props) {
     !BookArr || BookArr.length < 1 ) ? <Loader/> :
     BookArr.map((el, index) => {
         var shelfbook=BookShelfArr.find(a=>a.bookid==el._id && a.userid==userid);
-    //   const isBookreadbyThisUser = !BookShelfArr ? false : (BookShelfArr.filter(a=> a.userid === userid && a.bookid === el._id) !== null);
-      return <> {!shelfbook ?<div></div>: <div className='book-item flex flex-column col-sm-3 flex-sb my-2' key={index}>
+
+return <> {!shelfbook ?<div></div>: <div className='book-item flex flex-column col-sm-3 flex-sb my-2' key={index}>
           <div className='book-item-img'>
             <img src = {el.bookimage} alt = "cover" />
           </div>

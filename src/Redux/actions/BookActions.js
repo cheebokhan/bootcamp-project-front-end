@@ -1,5 +1,8 @@
 import axios from "axios";
-import { CREATE_BOOK_FAIL, CREATE_BOOK_REQUEST, CREATE_BOOK_SUCCESS,FETCH_BOOKS ,ADDTOSHELF_BOOK_FAIL,ADDTOSHELF_BOOK_SUCCESS,ADDTOSHELF_BOOK_REQUEST, FETCH_BOOKSHELF, UPDATE_BOOK_REQUEST, UPDATE_BOOK_SUCCESS, UPDATE_BOOK_FAIL, DELETE_BOOK_REQUEST, DELETE_BOOK_SUCCESS, DELETE_BOOK_FAIL} from "../ActionTypes/BookActionType";
+import { CREATE_BOOK_FAIL, CREATE_BOOK_REQUEST, CREATE_BOOK_SUCCESS,FETCH_BOOKS, 
+  ADDTOSHELF_BOOK_FAIL,ADDTOSHELF_BOOK_SUCCESS,ADDTOSHELF_BOOK_REQUEST, 
+  FETCH_BOOKSHELF, UPDATE_BOOK_REQUEST, UPDATE_BOOK_SUCCESS, UPDATE_BOOK_FAIL,
+   DELETE_BOOK_REQUEST, DELETE_BOOK_SUCCESS, DELETE_BOOK_FAIL} from "../ActionTypes/BookActionType";
 import { useNavigate } from "react-router-dom";
 
 
@@ -34,6 +37,7 @@ function AddToShelf(BookData){
               type:ADDTOSHELF_BOOK_FAIL,
               payload: err.response && err.response.data.message
           })
+          alert("Please login then Add book to your book shelf")
        })
         
     } catch (error) {
@@ -46,7 +50,7 @@ function AddToShelf(BookData){
 }
 }
 
-function CreateBookActions(BookData){
+function CreateBookActions(BookData,navigate){
 return async dispatch =>{
     try {
         dispatch({
@@ -61,11 +65,14 @@ return async dispatch =>{
             type:CREATE_BOOK_SUCCESS,
             payload:res.data,
          })
+         navigate('/')
+
         }).catch((err)=>{
           dispatch({
               type:CREATE_BOOK_FAIL,
               payload: err.response && err.response.data.message
           })
+          alert("book not add successfully please fill the form");
        })
         
     } catch (error) {
@@ -122,8 +129,6 @@ function GetBooks  () {
 
   function UpdateBookActions(bookId, bookData,navigate) {
 
-
-    debugger
     return async (dispatch) => {
       try {
         dispatch({
@@ -146,20 +151,17 @@ function GetBooks  () {
           dispatch({
             type: UPDATE_BOOK_FAIL,
             payload:
-              error.response && error.response.data.message
-                ? error.response.data.message
-                : error.message,
+              error.response && error.response.data.message,
+            
           });
          })
-  
        
       } catch (error) {
         dispatch({
           type: UPDATE_BOOK_FAIL,
           payload:
-            error.response && error.response.data.message
-              ? error.response.data.message
-              : error.message,
+            error.response && error.response.data.message,
+            
         });
       }
     };
@@ -167,7 +169,6 @@ function GetBooks  () {
   
 
    function  DeleteBook(bookId) {
-    debugger
   return async (dispatch) => {
     try {
       dispatch({
@@ -183,9 +184,8 @@ function GetBooks  () {
         dispatch({
           type: DELETE_BOOK_FAIL,
           payload:
-            error.response && error.response.data.message
-              ? error.response.data.message
-              : error.message,
+            error.response && error.response.data.message,
+             
         });
       })
   
@@ -194,9 +194,7 @@ function GetBooks  () {
       dispatch({
         type: DELETE_BOOK_FAIL,
         payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
+          error.response && error.response.data.message,
       });
     }
   }
